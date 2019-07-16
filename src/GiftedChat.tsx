@@ -146,6 +146,7 @@ export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
   onInputTextChanged?(text: string): void
   /* Custom parse patterns for react-native-parsed-text used to linking message content (like URLs and phone numbers) */
   parsePatterns?(): React.ReactNode
+  onClearTextReset?(textInput: any): void
 }
 
 interface GiftedChatState {
@@ -221,6 +222,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     extraData: null,
     minComposerHeight: MIN_COMPOSER_HEIGHT,
     maxComposerHeight: MAX_COMPOSER_HEIGHT,
+    onClearTextReset: null,
   }
 
   static propTypes = {
@@ -278,6 +280,7 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
     minComposerHeight: PropTypes.number,
     maxComposerHeight: PropTypes.number,
     alignTop: PropTypes.bool,
+    onClearTextReset: PropTypes.func,
   }
 
   static append(
@@ -611,6 +614,9 @@ class GiftedChat extends React.Component<GiftedChatProps, GiftedChatState> {
   resetInputToolbar() {
     if (this.textInput) {
       this.textInput.clear()
+      if(this.props.onClearTextReset){
+        this.props.onClearTextReset(this.textInput);
+      }
     }
     this.notifyInputTextReset()
     const newComposerHeight = this.props.minComposerHeight
