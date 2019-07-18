@@ -31,9 +31,7 @@
     "precommit": "yarn lint",
     "test": "TZ=Europe/Paris jest --no-watchman",
     "test:watch": "TZ=Europe/Paris jest --watch",
-    "test:coverage": "TZ=Europe/Paris jest --coverage",
-    "prepublishOnly": "yarn lint && yarn build && yarn test",
-    "postinstall" : "yarn install && yarn lint && yarn build"
+    "test:coverage": "TZ=Europe/Paris jest --coverage"
   },
   "jest": {
     "preset": "react-native",
